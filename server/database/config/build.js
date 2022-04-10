@@ -13,3 +13,5 @@ console.log('Tables created successfully');
 });
 
 connection.end();
+
+// \i 'C:\\Users\\hp\\Desktop\\E-commerce-Team4\\server\\database\\config\\build.sql';
