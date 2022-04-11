@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --white: #ffffff;
+  --black: #000000;
+  --main: #2cb674;
+  --backGray: #f8f8f8;
+  --backGreen: #f2fbf7;
+  --backOpacity: hsla(240, 29%, 16%, 0.1);
+  --icon: #ccd2e3;
+  --font: #1d1d35;
+}
+
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Red Hat Display', sans-serif;
+}
+
+input::placeholder,
+textarea::placeholder {
+  font-family: 'Red Hat Display', sans-serif;
+  font-weight: 300;
+}
+
+body {
+  font-family: 'Red Hat Display', sans-serif;
+  width: 100%;
+  height: 100%;
+  background-color: var(--white);
+}
+
+ul {
+  list-style-type: none;
+}
+
+select {
+  font-family: 'Red Hat Display', sans-serif;
+}
+
+a {
+  font-family: 'Red Hat Display', sans-serif;
+  color: var(--font);
+  text-decoration: none;
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--main);
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--main);
+}
+
+::selection {
+  background-color: var(--main);
+}

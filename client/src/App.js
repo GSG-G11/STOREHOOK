@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Navbar from './Components/Navbar/Navbar';
 import Listofproducts from './Components/Cart/Listofproducts';
-import Login from './Components/Forms/LoginForm';
+import Login from './Components/Forms/Login/LoginForm';
 
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
