@@ -17,7 +17,7 @@ const addProductHandler = (req, res, next) => {
     .then((data) => res.json({
       message: 'Product added successfully',
       status: 201,
-      product: data.rows[0],
+      data: data.rows[0],
     }))
     .catch((err) => err.details ? next(customError(err.details[0].message, 400)) : next(err) );
 };

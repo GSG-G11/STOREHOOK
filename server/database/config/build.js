@@ -5,13 +5,11 @@ const connection = require('./connection');
 const sqlFile = fs.readFileSync('./server/database/config/build.sql', 'utf8');
 
 connection.query(sqlFile, (err, res) => {
-if (err) {
+  if (err) {
     console.log('Error creating tables: ', err);
-}
+  }
 
-console.log('Tables created successfully');
+  console.log('Tables created successfully');
 });
 
 connection.end();
-
-// \i 'C:\\Users\\hp\\Desktop\\E-commerce-Team4\\server\\database\\config\\build.sql';
