@@ -19,10 +19,10 @@ CREATE TABLE products (
 
 );
 insert into categories (name) values ('Electronics'),('Iphone'),('Food'),('Books');
-insert into products (name,description,price,image,category_id) values ('Iphone','iphone is the best phone','1000','https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjNy7KHhM_hAhUJ5oMKHXKlC_kQjRx6BAgBEAU&url=https%3A%2F%2Fwww.apple.com%2Fshop%2Fbuy-iphone%2Fiphone-11-pro&psig=AOvVaw2X_X_X_X_X_X_X_X&ust=1589788982799086',1),
- ('Samsung','Samsung is the best phone','1000','https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjNy7KHhM_hAhUJ5oMKHXKlC_kQjRx6BAgBEAU&url=https%3A%2F%2Fwww.apple.com%2Fshop%2Fbuy-iphone%2Fiphone-11-pro&psig=AOvVaw2X_X_X_X_X_X_X_X&ust=1589788982799086',2), 
- ('Nokia','Nokia is the best phone','1000','https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjNy7KHhM_hAhUJ5oMKHXKlC_kQjRx6BAgBEAU&url=https%3A%2F%2Fwww.apple.com%2Fshop%2Fbuy-iphone%2Fiphone-11-pro&psig=AOvVaw2X_X_X_X_X_X_X_X&ust=1589788982799086',3), 
- ('Sony','Sony is the best phone','1000','https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjNy7KHhM_hAhUJ5oMKHXKlC_kQjRx6BAgBEAU&url=https%3A%2F%2Fwww.apple.com%2Fshop%2Fbuy-iphone%2Fiphone-11-pro&psig=AOvVaw2X_X_X_X_X_X_X_X&ust=1589788982799086',4);
+insert into products (name,description,price,image,category_id) values ('Iphone','iphone is the best phone','1000','https://images.unsplash.com/photo-1638913975386-d61f0ec6500d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80',1),
+ ('Samsung','Samsung is the best phone','1000','https://images.unsplash.com/photo-1643101809542-6454520860f0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=806',2), 
+ ('Nokia','Nokia is the best phone','1000','https://images.unsplash.com/photo-1643101453249-d9eae79700e1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80',3), 
+ ('Sony','Sony is the best phone','1000','https://images.unsplash.com/photo-1643101451925-1268efaec21a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80',4);
 
 
 COMMIT;
