@@ -1,0 +1,11 @@
+.wrap-product-list {
+  padding: 1.2rem 1rem;
+}
+
+.product-list {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-gap: 20px;
+  place-items: start;
+}

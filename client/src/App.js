@@ -1,39 +1,79 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import './App.css';
-import Navbar from './Components/Navbar/Navbar';
-import Listofproducts from './Components/Cart/Listofproducts';
-import Login from './Components/Forms/Login/LoginForm';
-
-import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Navbar, ProductsList } from './Components';
 class App extends Component {
-  state ={
+  state = {
     products: [],
-    
+    alertDisplay: false,
+    loginDisplay: false,
+    addDisplay: false,
+    confirmDisplay: false,
+    cart: JSON.parse(localStorage.getItem('cart')) || [],
+    isLoggedIn: JSON.parse(localStorage.getItem('isLoggedIn')) || false,
+    isLoading: true,
+  };
+
+  componentDidMount() {
+    fetch('/api/v1/products')
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 200)
+          this.setState({ products: res.data, isLoading: false });
+      })
+      .catch((err) => {
+        if (err.status === 500) window.location.href = '/error';
+      });
   }
-  componentDidMount(){
-    fetch('/api/v1/products').then(data => data.json()).then((data) => console.log(data)).catch(console.log)
-  }
+
+  addProduct = (e) => {
+    e.preventDefault();
+    const { name, description, category, price, image } = e.target;
+    const product = {
+      name: name.value,
+      description: description.value,
+      category: category.value,
+      price: price.value,
+      image: image.value,
+    };
+
+    fetch('/api/v1/product', {
+      headers: { method: 'POST' },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 201) this.showAndCloseModal('alertDisplay');
+      })
+      .catch((err) => {
+        if (err.status === 500) window.location.href = '/error';
+      });
+    this.showAndCloseModal('addDisplay');
+  };
+
+  showAndCloseModal = (modal) => {
+    this.setState((preState) => {
+      return { [modal]: !preState[modal] };
+    });
+  };
+
   render() {
+    const { products, isLoggedIn, isLoading, loginDisplay } = this.state;
     return (
-        <Router>
-          <div>
-          <Navbar />
+      <Router>
+        <div>
+          <Navbar
+            isLoggedIn={isLoggedIn}
+            showLoginModal={this.showAndCloseModal}
+          />
+          {isLoading && <div>Loading...</div>}
           <Switch>
-          <Route path="/login">
-              <Login list={'login'} />
-          </Route>
-          <Route path="/cart">
-              <Listofproducts list={'test'} />
-          </Route>
-          <Route path="/">
-              <Listofproducts list={'home'} />
-          </Route>
+            <Route exact path="/">
+              <ProductsList products={products} isLoggedIn={isLoggedIn} />
+            </Route>
           </Switch>
-          </div>
-
-        </Router>
-
+        </div>
+      </Router>
     );
   }
 }
