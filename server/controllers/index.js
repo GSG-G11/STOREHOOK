@@ -1,13 +1,13 @@
 const allProductsHandler = require('./products/getAllProducts');
-const deleteProductHaneler = require('./products/deleteProduct');
+const deleteProductHandler = require('./products/deleteProduct');
 const addProductHandler = require('./products/postProduct');
 const productInfoHandler = require('./products/getSingleProduct');
-const updateProductHandelar = require('./products/updateProduct');
+const updateProductHandler = require('./products/updateProduct');
 
 module.exports ={
     allProductsHandler,
-    deleteProductHaneler,
+    deleteProductHandler,
     addProductHandler,
     productInfoHandler,
-    updateProductHandelar
+    updateProductHandler
 }

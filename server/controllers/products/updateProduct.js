@@ -1,19 +1,20 @@
 /* eslint-disable linebreak-style */
 const { updateProductQuery } = require('../../database/queries');
 
-const updateProductHandelar = (req, res) => {
+const updateProductHandler = (req, res) => {
   const { id } = req.params;
   const {
-    name, description, image, category_id
+    name, description, image, categoryId, price,
   } = req.body;
 
-  updateProductQuery(id, name, description, image, category_id)
+  updateProductQuery(id, name, description, image, categoryId, price)
     .then((data) => {
       res.status(201).json({
-        message: 'Your Product was updated successflly !',
-        post: data.rows,
+        message: 'Product updated successfully!',
+        status: 201,
+        data: data.rows[0],
       });
     }).catch((err) => res.json({ message: 'oops! try Again!', error: err }));
 };
 
-module.exports = updateProductHandelar;
+module.exports = updateProductHandler;

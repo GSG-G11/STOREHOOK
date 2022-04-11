@@ -1,9 +1,9 @@
 const { deleteProductQuery } = require('../../database/queries');
 
-const deleteProductHaneler = (req, res) => {
+const deleteProductHandler = (req, res) => {
   deleteProductQuery(req.params.id)
-    .then(() => res.json({ massage: 'product was deketed' }))
-    .catch((err) => res.status(500).json({ massage: err }));
+    .then(() => res.json({ message: 'product deleted successfully', status: 200 }))
+    .catch((err) => res.status(500).json({ message: err }));
 };
 
-module.exports = deleteProductHaneler;
+module.exports = deleteProductHandler;
