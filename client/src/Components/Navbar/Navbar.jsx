@@ -1,40 +1,56 @@
 import React from 'react';
 import { Link, BrowserRouter as Router } from 'react-router-dom';
-import '../Home/home.css';
+import './Navbar.css';
+import logo from '../../images/logo.svg';
 
-const Navbar = () => {
-  return ( 
-      <Router>
-      <nav className="navbar navbar-expand-md">
-          <Link className="navbar-brand" to="/">Navbar</Link>
+const Navbar = ({ isLoggedIn, showLoginModal }) => {
+  return (
+    <Router>
+      <nav className="navbar">
+        <Link to="/">
+          <img src={logo} alt="logo" />
+        </Link>
 
-          <div className="collapse" id="navbars">
-            <form className="form-inline">
-              <input className="form-control" type="text" placeholder="Search" />
-            </form>
+        <div className="search">
+          <i className="bx bx-search"></i>
+          <input
+            className="search-input"
+            type="search"
+            placeholder="Search.."
+          />
+        </div>
 
-            <ul className="navbar-nav">
-              <li className="nav-item icon">
-                <Link className="nav-link" to="">
-                  <div>
-                    <i className='bx bx-bell'></i>
-                  </div>
-                </Link>
-              </li>
+        <ul className="navbar-nav">
+          <li>
+            <div className="icon-wrap">
+              <i className="bx bx-bell"></i>
+            </div>
+          </li>
 
-              <li className="nav-item icon">
-                <Link className="nav-link" to="/cart">
-                  <div><span className="prod-cart-num"></span><i className='bx bx-shopping-bag'></i></div>
-                </Link>
-              </li>
+          <li>
+            <Link to="/cart">
+              <div className="icon-wrap">
+                <span className="prod-cart-num"></span>
+                <i className="bx bx-shopping-bag"></i>
+              </div>
+            </Link>
+          </li>
 
-              <li className="nav-item">
-                <button className="btn btn-secondary" type="submit">Login</button>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </Router>
+          <li>
+            {isLoggedIn ? (
+              <div>{JSON.stringify(localStorage.getItem('user')).name} </div>
+            ) : (
+              <button
+                className="btn-login"
+                onClick={() => showLoginModal('loginDisplay')}
+              >
+                Login
+              </button>
+            )}
+          </li>
+        </ul>
+      </nav>
+    </Router>
   );
 };
 
