@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Navbar, ProductsList } from './Components';
+import { Navbar, ProductsList , Productdetails } from './Components';
 class App extends Component {
   state = {
     products: [],
@@ -71,6 +71,9 @@ class App extends Component {
           <Switch>
             <Route exact path="/">
               <ProductsList products={products} isLoggedIn={isLoggedIn} />
+            </Route>
+            <Route path="/product/:id">
+              <Productdetails />
             </Route>
           </Switch>
         </div>
