@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const connection = new Pool({
   connectionString: URL,
-  ssl: false,
+  ssl: sslValue,
 });
 
 module.exports = connection;
