@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './style.css';
+import './ProductDetails.css';
 
 class ProductDetails extends Component {
   state = { product: {}, count: 1 };
