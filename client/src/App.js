@@ -1,7 +1,9 @@
 import { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Navbar, ProductsList, LoginForm, Filters } from './Components';
+import { Navbar, ProductsList , Productdetails ,LoginForm, Filters } from './Components';
+
+
 
 class App extends Component {
   state = {
@@ -107,6 +109,9 @@ class App extends Component {
                 products={products}
                 isLoggedIn={isLoggedIn}
               />
+            </Route>
+            <Route path="/product/:id">
+              <Productdetails />
             </Route>
           </Switch>
         </div>

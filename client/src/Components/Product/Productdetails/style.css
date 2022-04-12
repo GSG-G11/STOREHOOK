@@ -1,0 +1,104 @@
+
+
+.product-details-img{position: absolute;
+    width: 510px;
+    height: 390.4px;
+    left: 70px;
+    top: 191px;
+    background: #F8F8F8;
+    border-radius: 20px;
+}
+
+.details-title{
+    position: absolute;
+    width: 217px;
+    height: 33px;
+    left: 645px;
+    top: 211px;
+    font-family: 'Red Hat Display';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 33px;
+    color: #1D1D35;
+
+}
+.detail-description{
+    position: absolute;
+    left: 51.04%;
+    right: 9.38%;
+    top: 38.72%;
+    bottom: 52.37%;
+    font-family: 'Red Hat Display';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;    
+    letter-spacing: 0.02em;
+    color: #B3B3B3;
+
+}
+.product-details-price{
+    position: absolute;
+    width: 53px;
+    height: 30px;
+    left: 645px;
+    top: 372px;
+    font-family: 'Red Hat Display';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 30px;
+    color: #1D1D35;
+
+}
+.add-to-cart{
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+    width: 100%;
+    background: #2CB674;
+    border-radius: 50px;
+    position: absolute;
+    width: 150px;
+    height: 50px;
+    left: 820px;
+    top: 511px;
+
+}
+.add-to-wishlist{
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+    width: 100%;
+    background: #f3f5f4;
+    border-radius: 50px;
+    position: absolute;
+    width: 150px;
+    height: 50px;
+    left: 655px;
+    top: 511px;
+    color: #2CB674;
+    border: 1px solid #2CB674;
+
+}
+.count{
+    position: absolute;
+    width: 109px;
+    height: 40px;
+    left: 645px;
+    top: 422px;
+    
+}
+.total{
+    position: absolute;
+    width: 94px;
+    height: 29px;
+    left: 645px;
+    top: 470px;
+
+}
