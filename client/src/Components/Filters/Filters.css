@@ -1,0 +1,29 @@
+.filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.7rem 1rem 0;
+}
+
+.cate-price-filter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+.select-options {
+  margin-left: 5px;
+  border-radius: 150px;
+  border: 1px solid var(--icon);
+  padding: 0.5rem 15px;
+}
+
+.add-product-btn {
+  background-color: var(--main);
+  color: var(--white);
+  padding: 10px 20px;
+  border-radius: 150px;
+  cursor: pointer;
+}
