@@ -32,34 +32,36 @@ class App extends Component {
           this.setState({ products: res.data.data, isLoading: false });
       })
       .catch((err) => {
+        console.log(err);
         if (err.status === 500) window.location.href = '/error';
       });
   }
 
-  addProduct = (e) => {
-    e.preventDefault();
-    const { name, description, category, price, image } = e.target;
-    const product = {
-      name: name.value,
-      description: description.value,
-      category: category.value,
-      price: price.value,
-      image: image.value,
-    };
+  // addProduct = (e) => {
+  //   e.preventDefault();
+  //   const { name, description, category, price, image } = e.target;
+  //   const product = {
+  //     name: name.value,
+  //     description: description.value,
+  //     category: category.value,
+  //     price: price.value,
+  //     image: image.value,
+  //   };
 
-    fetch('/api/v1/product', {
-      headers: { method: 'POST' },
-      body: JSON.stringify(product),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.status === 201) this.showAndCloseModal('alertDisplay');
-      })
-      .catch((err) => {
-        if (err.status === 500) window.location.href = '/error';
-      });
-    this.showAndCloseModal('addDisplay');
-  };
+  //   fetch('/api/v1/product', {
+  //     headers: { method: 'POST' },
+  //     body: JSON.stringify(product),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       if (res.status === 201) this.showAndCloseModal('alertDisplay');
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       if (err.status === 500) window.location.href = '/error';
+  //     });
+  //   this.showAndCloseModal('addDisplay');
+  // };
 
   showAndCloseModal = (modal) => {
     this.setState((preState) => {
