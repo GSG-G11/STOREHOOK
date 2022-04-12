@@ -14,8 +14,13 @@ export default function ProductCard({
         {isLoggedIn
           ? products.map((product) => {
               const { id, name, price, image, category } = product;
+              console.log(product);
+              if (isNaN(category)) {
+                console.log('category is number');
+              }
+
               return (
-                <div className="product-card" key={id}>
+                <div className="product-card" key={id || Date.now()}>
                   <div className="wrap-img">
                     <div className="product-category">{category}</div>
                     <div
@@ -50,7 +55,7 @@ export default function ProductCard({
           : products.map((product) => {
               const { id, name, price, image, category } = product;
               return (
-                <div className="product-card" key={id}>
+                <div className="product-card" key={id || Date.now()}>
                   <div className="wrap-img">
                     <div className="product-category">{category}</div>
                     <Link to={`/product/${id}`}>

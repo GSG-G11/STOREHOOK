@@ -1,7 +1,13 @@
 import { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Navbar, ProductsList, LoginForm, Filters } from './Components';
+import {
+  Navbar,
+  ProductsList,
+  LoginForm,
+  Filters,
+  AddProductForm,
+} from './Components';
 
 class App extends Component {
   state = {
@@ -16,6 +22,8 @@ class App extends Component {
     searchWords: '',
     categorySelected: 'All',
     sort: 'Newest',
+    categories: [],
+    errMessage: '',
   };
 
   componentDidMount() {
@@ -28,33 +36,16 @@ class App extends Component {
       .catch((err) => {
         if (err.status === 500) window.location.href = '/error';
       });
+
+    fetch('/api/v1/categories')
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 200) this.setState({ categories: res.data });
+      })
+      .catch((err) => {
+        if (err.status === 500) window.location.href = '/error';
+      });
   }
-
-  // addProduct = (e) => {
-  //   e.preventDefault();
-  //   const { name, description, category, price, image } = e.target;
-  //   const product = {
-  //     name: name.value,
-  //     description: description.value,
-  //     category: category.value,
-  //     price: price.value,
-  //     image: image.value,
-  //   };
-
-  //   fetch('/api/v1/product', {
-  //     headers: { method: 'POST' },
-  //     body: JSON.stringify(product),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       if (res.status === 201) this.showAndCloseModal('alertDisplay');
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       if (err.status === 500) window.location.href = '/error';
-  //     });
-  //   this.showAndCloseModal('addDisplay');
-  // };
 
   showAndCloseModal = (modal) => {
     this.setState((preState) => {
@@ -66,6 +57,16 @@ class App extends Component {
     this.setState({ [name]: value });
   };
 
+  AddProductHandler = (product) => {
+    // this.setState((prevState) => {
+    //   return { products: [product, ...prevState.products] };
+    // });
+    // this.setState({ products: [product, ...this.state.products] });
+  };
+
+  errHandler = (err) => {
+    this.setState({ errMessage: err });
+  };
   render() {
     const {
       products,
@@ -75,10 +76,12 @@ class App extends Component {
       searchWords,
       categorySelected,
       sort,
+      addDisplay,
+      categories,
     } = this.state;
     return (
       <Router>
-        <div>
+        <div className={(addDisplay || loginDisplay) && 'root-container'}>
           <Navbar
             handleChange={this.handleChange}
             searchWords={searchWords}
@@ -86,6 +89,8 @@ class App extends Component {
             showLoginModal={this.showAndCloseModal}
           />
           <Filters
+            categories={categories}
+            showAndCloseModal={this.showAndCloseModal}
             isLoggedIn={isLoggedIn}
             handleChange={this.handleChange}
             categorySelected={categorySelected}
@@ -95,6 +100,14 @@ class App extends Component {
           {loginDisplay && (
             <LoginForm
               isLoggedIn={isLoggedIn}
+              showAndCloseModal={this.showAndCloseModal}
+            />
+          )}
+          {addDisplay && (
+            <AddProductForm
+              errHandler={this.errHandler}
+              AddProductHandler={this.AddProductHandler}
+              categories={categories}
               showAndCloseModal={this.showAndCloseModal}
             />
           )}

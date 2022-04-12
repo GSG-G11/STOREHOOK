@@ -31,7 +31,7 @@ class Login extends Component {
     return (
       <div className="wrap-login">
         <form onSubmit={this.login} className="form">
-          <div className="form-group">
+          <div className="login-form-group">
             <h2 className="title">Welcome, we missed you</h2>
             <i
               className="bx bx-x"
@@ -40,7 +40,7 @@ class Login extends Component {
           </div>
           <img className="img" src={login} alt="" />
           <h5>Email</h5>
-          <div className="icons">
+          <div className="icons email">
             <i className="login-icon bx bx-envelope"></i>
             <input
               className="email"

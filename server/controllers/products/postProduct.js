@@ -19,7 +19,7 @@ const addProductHandler = (req, res, next) => {
       status: 201,
       data: data.rows[0],
     }))
-    .catch((err) => err.details ? next(customError(err.details[0].message, 400)) : next(err) );
+    .catch((err) => err.details ? next(customError(err.details[0].message, 400)) : next(err));
 };
 
 module.exports = addProductHandler;
