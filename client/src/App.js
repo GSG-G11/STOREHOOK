@@ -4,9 +4,10 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import {
   Navbar,
   ProductsList,
+  ProductDetails,
+  AddProductForm,
   LoginForm,
   Filters,
-  AddProductForm,
 } from './Components';
 
 class App extends Component {
@@ -120,6 +121,9 @@ class App extends Component {
                 products={products}
                 isLoggedIn={isLoggedIn}
               />
+            </Route>
+            <Route path="/product/:id">
+              <ProductDetails />
             </Route>
           </Switch>
         </div>
