@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import axios from 'axios';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Navbar, ProductsList } from './Components';
@@ -16,23 +15,13 @@ class App extends Component {
   };
 
   componentDidMount() {
-    // fetch('/api/v1/products')
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     if (res.status === 200)
-    //       this.setState({ products: res.data, isLoading: false });
-    //   })
-    //   .catch((err) => {
-    //     if (err.status === 500) window.location.href = '/error';
-    //   });
-    axios
-      .get('/api/v1/products')
+    fetch('/api/v1/products')
+      .then((res) => res.json())
       .then((res) => {
         if (res.status === 200)
-          this.setState({ products: res.data.data, isLoading: false });
+          this.setState({ products: res.data, isLoading: false });
       })
       .catch((err) => {
-        console.log(err);
         if (err.status === 500) window.location.href = '/error';
       });
   }
