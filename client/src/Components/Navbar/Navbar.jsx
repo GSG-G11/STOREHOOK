@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, BrowserRouter as Router } from 'react-router-dom';
+import { Link, BrowserRouter as Router, Redirect } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../../images/logo.svg';
 

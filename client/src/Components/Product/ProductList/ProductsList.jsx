@@ -14,6 +14,7 @@ export default function ProductsList(props) {
       filteredProducts = filteredProducts.filter(
         (product) => product.category === categorySelected
       );
+    if (sort === 'Newest') filteredProducts.sort((a, b) => b.id - a.id);
     if (sort === 'Lowest') filteredProducts.sort((a, b) => a.price - b.price);
     if (sort === 'Highest') filteredProducts.sort((a, b) => b.price - a.price);
 

@@ -1,4 +1,4 @@
-import { Link, BrowserRouter as Router } from 'react-router-dom';
+import { Link, BrowserRouter as Router, Route } from 'react-router-dom';
 import './ProductCard.css';
 
 export default function ProductCard({
@@ -9,13 +9,17 @@ export default function ProductCard({
   updateProduct,
 }) {
   return (
-    <Router>
+    <Route>
       <>
         {isLoggedIn
           ? products.map((product) => {
               const { id, name, price, image, category } = product;
+              if (isNaN(category)) {
+                console.log('category is number');
+              }
+
               return (
-                <div className="product-card" key={id}>
+                <div className="product-card" key={id || Date.now()}>
                   <div className="wrap-img">
                     <div className="product-category">{category}</div>
                     <div
@@ -50,7 +54,7 @@ export default function ProductCard({
           : products.map((product) => {
               const { id, name, price, image, category } = product;
               return (
-                <div className="product-card" key={id}>
+                <div className="product-card" key={id || Date.now()}>
                   <div className="wrap-img">
                     <div className="product-category">{category}</div>
                     <Link to={`/product/${id}`}>
@@ -77,6 +81,6 @@ export default function ProductCard({
               );
             })}
       </>
-    </Router>
+    </Route>
   );
 }

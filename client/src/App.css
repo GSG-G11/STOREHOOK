@@ -4,6 +4,7 @@
   --white: #ffffff;
   --black: #000000;
   --main: #2cb674;
+  --yellow: #f3ecaa;
   --backGray: #f8f8f8;
   --backGreen: #f2fbf7;
   --backOpacity: hsla(240, 29%, 16%, 0.3);
@@ -30,6 +31,10 @@ input::placeholder,
 textarea::placeholder {
   font-family: 'Red Hat Display', sans-serif;
   font-weight: 300;
+}
+
+button {
+  font-family: 'Red Hat Display', sans-serif;
 }
 
 body {
@@ -70,4 +75,10 @@ a {
 
 ::selection {
   background-color: var(--main);
+}
+
+.root-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }

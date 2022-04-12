@@ -6,6 +6,7 @@ const {
   updateProductHandler,
 } = require('./products');
 const { getCategories } = require('./categories');
+const { serverError, clientError } = require('./error');
 
 module.exports = {
   allProductsHandler,
@@ -14,4 +15,6 @@ module.exports = {
   productInfoHandler,
   updateProductHandler,
   getCategories,
+  serverError, 
+  clientError,
 };

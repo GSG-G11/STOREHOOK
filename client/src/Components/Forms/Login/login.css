@@ -19,7 +19,7 @@
   box-shadow: 0px 8px 24px rgba(29, 29, 53, 0.15);
 }
 
-.form-group {
+.login-form-group {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -39,6 +39,15 @@
   margin-bottom: 10px;
   padding: 0 10px;
   border-radius: 8px;
+}
+
+.icons.email {
+  padding-right: 0;
+}
+
+.icons.email input {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 .form input {
@@ -87,5 +96,8 @@
   width: 50%;
 }
 
-.wrap-login.show {
+.bx-x,
+.bx-low-vision,
+.bx-show-alt {
+  cursor: pointer;
 }

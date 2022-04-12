@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const router = require('./routes');
-const { clientError, serverError } = require('./errors');
+const { clientError, serverError } = require('./controllers');
 
 const app = express();
 
