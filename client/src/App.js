@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Navbar, ProductsList } from './Components';
