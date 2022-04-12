@@ -7,7 +7,7 @@ const { clientError, serverError } = require('./errors');
 
 const app = express();
 
-app.set('port', process.env.PORT || 5000);
+app.set('port', process.env.PORT || 3000);
 app.disable('x-powered-by');
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
