@@ -1,4 +1,4 @@
-const connection = require('../config/connection');
+const connection = require('../../config/connection');
 
 const updateProductQuery = (id, name, description, image, categoryId, price) => connection.query({
   text: `
