@@ -1,7 +1,8 @@
 import { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Navbar, ProductsList } from './Components';
+import { Navbar, ProductsList, LoginForm, Filters } from './Components';
+
 class App extends Component {
   state = {
     products: [],
@@ -12,6 +13,9 @@ class App extends Component {
     cart: JSON.parse(localStorage.getItem('cart')) || [],
     isLoggedIn: JSON.parse(localStorage.getItem('isLoggedIn')) || false,
     isLoading: true,
+    searchWords: '',
+    categorySelected: 'All',
+    sort: 'Newest',
   };
 
   componentDidMount() {
@@ -58,19 +62,51 @@ class App extends Component {
     });
   };
 
+  handleChange = ({ target: { name, value } }) => {
+    this.setState({ [name]: value });
+  };
+
   render() {
-    const { products, isLoggedIn, isLoading, loginDisplay } = this.state;
+    const {
+      products,
+      isLoggedIn,
+      isLoading,
+      loginDisplay,
+      searchWords,
+      categorySelected,
+      sort,
+    } = this.state;
     return (
       <Router>
         <div>
           <Navbar
+            handleChange={this.handleChange}
+            searchWords={searchWords}
             isLoggedIn={isLoggedIn}
             showLoginModal={this.showAndCloseModal}
           />
+          <Filters
+            isLoggedIn={isLoggedIn}
+            handleChange={this.handleChange}
+            categorySelected={categorySelected}
+            sort={sort}
+          />
           {isLoading && <div>Loading...</div>}
+          {loginDisplay && (
+            <LoginForm
+              isLoggedIn={isLoggedIn}
+              showAndCloseModal={this.showAndCloseModal}
+            />
+          )}
           <Switch>
             <Route exact path="/">
-              <ProductsList products={products} isLoggedIn={isLoggedIn} />
+              <ProductsList
+                searchWords={searchWords}
+                categorySelected={categorySelected}
+                sort={sort}
+                products={products}
+                isLoggedIn={isLoggedIn}
+              />
             </Route>
           </Switch>
         </div>

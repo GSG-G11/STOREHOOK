@@ -3,7 +3,13 @@ import { Link, BrowserRouter as Router } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../../images/logo.svg';
 
-const Navbar = ({ isLoggedIn, showLoginModal }) => {
+const Navbar = ({ isLoggedIn, showLoginModal, searchWords, handleChange }) => {
+  const logout = () => {
+    localStorage.setItem('isLoggedIn', false);
+    localStorage.setItem('user', JSON.stringify({}));
+    showLoginModal('isLoggedIn');
+  };
+
   return (
     <Router>
       <nav className="navbar">
@@ -14,6 +20,9 @@ const Navbar = ({ isLoggedIn, showLoginModal }) => {
         <div className="search">
           <i className="bx bx-search"></i>
           <input
+            value={searchWords}
+            name="searchWords"
+            onChange={handleChange}
             className="search-input"
             type="search"
             placeholder="Search.."
@@ -38,7 +47,9 @@ const Navbar = ({ isLoggedIn, showLoginModal }) => {
 
           <li>
             {isLoggedIn ? (
-              <div>{JSON.stringify(localStorage.getItem('user')).name} </div>
+              <button className="btn-login" onClick={logout}>
+                Logout
+              </button>
             ) : (
               <button
                 className="btn-login"
