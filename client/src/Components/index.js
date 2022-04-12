@@ -1,6 +1,7 @@
 import Navbar from './Navbar';
 import { ProductsList, ProductDetails } from './Product';
 import { LoginForm, AddProductForm } from './Forms';
+import Home from './Home';
 import Filters from './Filters';
 
 export {
@@ -10,4 +11,5 @@ export {
   Filters,
   AddProductForm,
   ProductDetails,
+  Home,
 };

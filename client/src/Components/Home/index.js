@@ -1,6 +1,2 @@
-import Navbar from "./Navbar";
-
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
-  Navbar
-};
+import Home from './Home';
+export default Home;

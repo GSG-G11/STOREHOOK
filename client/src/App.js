@@ -3,11 +3,10 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import {
   Navbar,
-  ProductsList,
+  Home,
   ProductDetails,
   AddProductForm,
   LoginForm,
-  Filters,
 } from './Components';
 
 class App extends Component {
@@ -68,6 +67,15 @@ class App extends Component {
   errHandler = (err) => {
     this.setState({ errMessage: err });
   };
+
+  // alertHandler = (alert, state) => {
+  //   return(
+  //   <div>
+  //     <div className={`alert alert-${state}`}>
+  //       <p className='alert-text'>{alert}</p>
+  //   </div>)
+  // };
+
   render() {
     const {
       products,
@@ -79,25 +87,13 @@ class App extends Component {
       sort,
       addDisplay,
       categories,
+      alertDisplay,
     } = this.state;
     return (
       <Router>
-        <div className={(addDisplay || loginDisplay) && 'root-container'}>
-          <Navbar
-            handleChange={this.handleChange}
-            searchWords={searchWords}
-            isLoggedIn={isLoggedIn}
-            showLoginModal={this.showAndCloseModal}
-          />
-          <Filters
-            categories={categories}
-            showAndCloseModal={this.showAndCloseModal}
-            isLoggedIn={isLoggedIn}
-            handleChange={this.handleChange}
-            categorySelected={categorySelected}
-            sort={sort}
-          />
+        <div className={addDisplay || loginDisplay ? 'root-container' : ''}>
           {isLoading && <div>Loading...</div>}
+          {/* {alertDisplay && this.alertHandler} */}
           {loginDisplay && (
             <LoginForm
               isLoggedIn={isLoggedIn}
@@ -112,19 +108,30 @@ class App extends Component {
               showAndCloseModal={this.showAndCloseModal}
             />
           )}
+          <Navbar
+            handleChange={this.handleChange}
+            searchWords={searchWords}
+            isLoggedIn={isLoggedIn}
+            showLoginModal={this.showAndCloseModal}
+          />
           <Switch>
-            <Route exact path="/">
-              <ProductsList
-                searchWords={searchWords}
-                categorySelected={categorySelected}
-                sort={sort}
-                products={products}
-                isLoggedIn={isLoggedIn}
-              />
-            </Route>
-            <Route path="/product/:id">
-              <ProductDetails />
-            </Route>
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <Home
+                  categories={categories}
+                  showAndCloseModal={this.showAndCloseModal}
+                  isLoggedIn={isLoggedIn}
+                  handleChange={this.handleChange}
+                  categorySelected={categorySelected}
+                  sort={sort}
+                  searchWords={searchWords}
+                  products={products}
+                />
+              )}
+            />
+            <Route path="/product/:id" component={ProductDetails} />
           </Switch>
         </div>
       </Router>
