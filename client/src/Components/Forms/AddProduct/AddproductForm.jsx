@@ -3,7 +3,7 @@ import './addProduct.css';
 const AddProductForm = ({
   showAndCloseModal,
   categories,
-  AddProductHandler,
+  addProductHandler,
   errHandler,
 }) => {
   const addProduct = (e) => {
@@ -28,22 +28,7 @@ const AddProductForm = ({
       return;
 
     console.log(product);
-    fetch('/api/v1/product', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(product),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log('data', data.data);
-        if (data.status === 201) showAndCloseModal('addDisplay');
-        if (data.status === 400) errHandler(data.message);
-      })
-      .catch((err) => {
-        if (err.status === 500) window.location.href = '/error';
-      });
+    addProductHandler(product);
   };
 
   return (

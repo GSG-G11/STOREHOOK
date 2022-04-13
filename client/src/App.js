@@ -8,7 +8,7 @@ import {
   AddProductForm,
   LoginForm,
   ConfirmModal,
-  ListofCardproducts
+  ListofCardproducts,
 } from './Components';
 
 class App extends Component {
@@ -39,7 +39,7 @@ class App extends Component {
       .catch((err) => {
         if (err.status === 500) window.location.href = '/error';
       });
-        fetch('/api/v1/categories')
+    fetch('/api/v1/categories')
       .then((res) => res.json())
       .then((res) => {
         if (res.status === 200) this.setState({ categories: res.data });
@@ -53,55 +53,57 @@ class App extends Component {
     const { cart } = this.state;
     let newpord;
 
-    console.log(product , 'dadf');
+    console.log(product, 'dadf');
 
     cart.map((pro) => {
-    if(pro.id === product.id){
-      pro.quantity += 1
-      pro.totalPrice += pro.price
-      newpord = pro;
-      return newpord;
+      if (pro.id === product.id) {
+        pro.quantity += 1;
+        pro.totalPrice += pro.price;
+        newpord = pro;
+        return newpord;
+      }
+      return pro;
+    });
+
+    if (!newpord) {
+      cart.push({ ...product, quantity: 1, totalPrice: product.price });
     }
-      return pro
-    })
 
-    if(!newpord){
-      cart.push({...product , quantity: 1, totalPrice: product.price })
-    }
-
-    this.setState({cart: cart})
-    localStorage.setItem('cart', JSON.stringify(cart))
-  }
-
+    this.setState({ cart: cart });
+    localStorage.setItem('cart', JSON.stringify(cart));
+  };
 
   decretmentQunPrice = (id) => {
     const { cart } = this.state;
     cart.forEach((pro) => {
-      if(pro.id === id){
-        pro.quantity -= 1
-        pro.totalPrice -= pro.price
-        this.setState({cart: cart})
-        localStorage.setItem('cart', JSON.stringify(cart))
+      if (pro.id === id) {
+        pro.quantity -= 1;
+        pro.totalPrice -= pro.price;
+        this.setState({ cart: cart });
+        localStorage.setItem('cart', JSON.stringify(cart));
       }
-    })
-  }
+    });
+  };
 
   incretmentQunPrice = (id) => {
     const { cart } = this.state;
     cart.forEach((pro) => {
-      if(pro.id === id){
-        pro.quantity += 1
-        pro.totalPrice += pro.price
-        this.setState({cart: cart})
-        localStorage.setItem('cart', JSON.stringify(cart))
+      if (pro.id === id) {
+        pro.quantity += 1;
+        pro.totalPrice += pro.price;
+        this.setState({ cart: cart });
+        localStorage.setItem('cart', JSON.stringify(cart));
       }
-    })
-  }
+    });
+  };
+
   deleteCartProcuct = (id) => {
-    const cartarr = JSON.parse(localStorage.getItem('cart')).filter((pro) => pro.id !== id)
-    this.setState({cart : cartarr})
-    localStorage.setItem('cart', JSON.stringify(cartarr))
-  }
+    const cartarr = JSON.parse(localStorage.getItem('cart')).filter(
+      (pro) => pro.id !== id
+    );
+    this.setState({ cart: cartarr });
+    localStorage.setItem('cart', JSON.stringify(cartarr));
+  };
 
   showAndCloseModal = (modal) => {
     this.setState((preState) => {
@@ -113,11 +115,27 @@ class App extends Component {
     this.setState({ [name]: value });
   };
 
-  AddProductHandler = (product) => {
+  addProductHandler = (product) => {
+    fetch('/api/v1/product', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('data', data.data);
+        if (data.status === 201) this.showAndCloseModal('addDisplay');
+        if (data.status === 400) this.errHandler(data.message);
+      })
+      .catch((err) => {
+        if (err.status === 500) window.location.href = '/error';
+      });
     // this.setState((prevState) => {
     //   return { products: [product, ...prevState.products] };
     // });
-    // this.setState({ products: [product, ...this.state.products] });
+    this.setState({ products: [product, ...this.state.products] });
   };
 
   deleteProductHandler = () => {
@@ -194,7 +212,7 @@ class App extends Component {
           {addDisplay && (
             <AddProductForm
               errHandler={this.errHandler}
-              AddProductHandler={this.AddProductHandler}
+              addProductHandler={this.addProductHandler}
               categories={categories}
               showAndCloseModal={this.showAndCloseModal}
             />
@@ -216,7 +234,12 @@ class App extends Component {
 
           <Switch>
             <Route path="/cart">
-              <ListofCardproducts cart={cart} incretmentQun= {this.incretmentQunPrice} decretmentQun= {this.decretmentQunPrice} deleteCartProcuct={this.deleteCartProcuct}/>
+              <ListofCardproducts
+                cart={cart}
+                incretmentQun={this.incretmentQunPrice}
+                decretmentQun={this.decretmentQunPrice}
+                deleteCartProcuct={this.deleteCartProcuct}
+              />
             </Route>
             <Route
               exact
