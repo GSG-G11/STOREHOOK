@@ -72,12 +72,20 @@ export default function ProductCard({
                       <p className="product-price">${price}</p>
                     </div>
                     <div
-                        className="icon-wrap card-cart"
-                        onClick={() => addToCart({id, name, price, image, category, description})}
-                      >
-                        <i className="bx bx-shopping-bag"></i>
-                      </div>
-
+                      className="icon-wrap card-cart"
+                      onClick={() =>
+                        addToCart({
+                          id,
+                          name,
+                          price,
+                          image,
+                          category,
+                          description,
+                        })
+                      }
+                    >
+                      <i className="bx bx-shopping-bag"></i>
+                    </div>
                   </div>
                 </div>
               );
