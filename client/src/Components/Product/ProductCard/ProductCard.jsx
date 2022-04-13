@@ -7,6 +7,7 @@ export default function ProductCard({
   deleteProduct,
   addToCart,
   updateProduct,
+
 }) {
   return (
     <Router>
@@ -48,7 +49,7 @@ export default function ProductCard({
               );
             })
           : products.map((product) => {
-              const { id, name, price, image, category } = product;
+              const { id, name, price, image, category, description } = product;
               return (
                 <div className="product-card" key={id}>
                   <div className="wrap-img">
@@ -67,11 +68,12 @@ export default function ProductCard({
                       <p className="product-price">${price}</p>
                     </div>
                     <div
-                      className="icon-wrap card-cart"
-                      onClick={() => addToCart(id)}
-                    >
-                      <i className="bx bx-shopping-bag"></i>
-                    </div>
+                        className="icon-wrap card-cart"
+                        onClick={() => addToCart({id, name, price, image, category, description})}
+                      >
+                        <i className="bx bx-shopping-bag"></i>
+                      </div>
+
                   </div>
                 </div>
               );

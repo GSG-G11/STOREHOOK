@@ -1,0 +1,109 @@
+.img-prod-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-action {
+  display: flex;
+  width: 20%;
+  justify-content: center;
+}
+.cart-prod-holder {
+  display: flex;
+  justify-content: space-evenly;
+}
+.jumbotron {
+  padding: 1.6rem 1rem;
+  margin-bottom: 2rem;
+  background-color: #F8F8F8;
+  border-radius: 0.3rem;
+  height: 40%;
+  width: 25%;
+}
+.total-head {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6%;
+  margin-bottom: 8%;
+}
+.total-pay-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.total-pay-btn div{
+  width: 100%;
+  margin-bottom: 5%;
+}
+.checkout-div button.btn.btn-primary, .empty-div .btn.btn-primary,.together-div .btn.btn-primary{
+  width: 100%;
+}
+.checkout-div button.btn.btn-primary{
+  background-color: #2CB674;
+  border-color: #2CB674;
+  color: #fff;
+}
+.together-div .btn.btn-primary{
+  background-color: #EAF8F1;
+  border-color: #EAF8F1;
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+}
+.empty-div .btn.btn-primary{
+  color: #2CB674;
+}
+.product-cart-list {
+  width: 63%;
+}
+.product-card{
+  margin-bottom: 4%;
+}
+.incr.icon-wrap,.dec.icon-wrap {
+  font-size: 26px;
+  text-align: center;
+}
+.qun-num {
+  margin: 0px 7%;
+  align-items: center;
+  display: flex;
+  font-size: 18px;
+  font-weight: 600;
+}
+.incr.icon-wrap:hover,.dec.icon-wrap:hover {
+  background-color: #2cb674;
+  color: #fff;
+}
+.product-info.prod-card-info {
+  width: 50%;
+}
+.Cart-heading {
+  font-size: 20px;
+  margin-bottom: 2%;
+  margin-left: 8%;
+}
+.Cart-heading span {
+  color:#2cb674;
+  font-weight: 400;
+  margin-left: 2px;
+}
+p.no-item {
+  margin-left: 8%;
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  width: 76%;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+i.bx.bx-cart-alt {
+  color: #2cb674;
+  font-size: 28px;
+  margin-right: 1%;
+}
