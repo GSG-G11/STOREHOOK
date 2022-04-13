@@ -3,9 +3,31 @@ import './addProduct.css';
 const AddProductForm = ({
   showAndCloseModal,
   categories,
-  AddProductHandler,
-  errHandler,
+  addProductHandler,
+  updateProductHandler,
+  isEditing,
+  currentProduct,
+  handleState,
 }) => {
+  let productId = '';
+  let defaultName = '';
+  let defaultDesc = '';
+  let defaultPrice = '';
+  let defaultImage = '';
+  let defaultCategory = '';
+  let wordBtn = 'Add';
+
+  if (isEditing) {
+    const { id, name, description, price, category, image } = currentProduct;
+    productId = id;
+    defaultName = name;
+    defaultDesc = description;
+    defaultPrice = price;
+    defaultImage = image;
+    defaultCategory = category;
+    wordBtn = 'Update';
+  }
+
   const addProduct = (e) => {
     e.preventDefault();
     const { name, description, category, price, image } = e.target;
@@ -27,23 +49,13 @@ const AddProductForm = ({
     )
       return;
 
-    console.log(product);
-    fetch('/api/v1/product', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(product),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log('data', data.data);
-        if (data.status === 201) showAndCloseModal('addDisplay');
-        if (data.status === 400) errHandler(data.message);
-      })
-      .catch((err) => {
-        if (err.status === 500) window.location.href = '/error';
-      });
+    if (isEditing) updateProductHandler(product, productId);
+    else addProductHandler(product);
+  };
+
+  const closeModal = () => {
+    if (isEditing) handleState('isEditing', false);
+    showAndCloseModal('addDisplay');
   };
 
   return (
@@ -51,11 +63,8 @@ const AddProductForm = ({
       <div className="container">
         <div className="heading-parent">
           <div className="heading-form">
-            <h2>Add More Products</h2>
-            <div
-              className="prod-icon"
-              onClick={() => showAndCloseModal('addDisplay')}
-            >
+            <h2>{wordBtn} More Products</h2>
+            <div className="prod-icon" onClick={closeModal}>
               <i className="bx bx-x"></i>
             </div>
           </div>
@@ -67,6 +76,7 @@ const AddProductForm = ({
               <input
                 type="text"
                 name="name"
+                defaultValue={defaultName}
                 className="form-control"
                 placeholder="Enter Your Product Name"
                 autoComplete="off"
@@ -77,6 +87,7 @@ const AddProductForm = ({
               <label>Description</label>
               <textarea
                 name="description"
+                defaultValue={defaultDesc}
                 className="form-control"
                 placeholder="Enter Your Product Description"
                 required
@@ -84,7 +95,14 @@ const AddProductForm = ({
             </div>
             <div className="form-group">
               <label>Category</label>
-              <select name="category" className="form-control">
+              <select
+                name="category"
+                defaultValue={
+                  categories.filter((cate) => cate.name === defaultCategory)[0]
+                    .id
+                }
+                className="form-control"
+              >
                 <option disabled value="0">
                   Select a Category
                 </option>
@@ -106,6 +124,7 @@ const AddProductForm = ({
                 <input
                   type="number"
                   name="price"
+                  defaultValue={defaultPrice}
                   className="form-control rd"
                   placeholder="Enter Your Product Price"
                   required
@@ -123,6 +142,7 @@ const AddProductForm = ({
                 </div>
                 <input
                   type="url"
+                  defaultValue={defaultImage}
                   className="form-control rd"
                   name="image"
                   placeholder="Enter Your Product Image url"
@@ -132,7 +152,7 @@ const AddProductForm = ({
             </div>
             <div className="form-group btn-div">
               <button type="submit" className="btn btn-secondary" id="addStore">
-                Add Product
+                {wordBtn} Product
               </button>
             </div>
           </form>

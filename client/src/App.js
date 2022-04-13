@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import './App.css';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import {
   Navbar,
@@ -11,6 +11,7 @@ import {
   ConfirmModal,
   ListofCardproducts,
 } from './Components';
+
 const Toast = Swal.mixin({
   toast: true,
   position: 'top-end',
@@ -18,14 +19,13 @@ const Toast = Swal.mixin({
   timer: 3000,
   timerProgressBar: true,
   didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  },
+});
 class App extends Component {
   state = {
     products: [],
-    alertDisplay: false,
     loginDisplay: false,
     addDisplay: false,
     confirmDisplay: false,
@@ -38,9 +38,11 @@ class App extends Component {
     categories: [],
     errMessage: '',
     confirmToDeleteId: 0,
+    currentProduct: {},
+    isEditing: false,
   };
 
-  componentDidMount() {
+  fetchProducts = () => {
     fetch('/api/v1/products')
       .then((res) => res.json())
       .then((res) => {
@@ -58,13 +60,15 @@ class App extends Component {
       .catch((err) => {
         if (err.status === 500) window.location.href = '/error';
       });
+  };
+
+  componentDidMount() {
+    this.fetchProducts();
   }
 
   addToCart = (product) => {
     const { cart } = this.state;
     let newpord;
-
-    console.log(product, 'dadf');
 
     cart.map((pro) => {
       if (pro.id === product.id) {
@@ -107,6 +111,7 @@ class App extends Component {
       }
     });
   };
+
   deleteCartProcuct = (id) => {
     const cartarr = JSON.parse(localStorage.getItem('cart')).filter(
       (pro) => pro.id !== id
@@ -124,12 +129,56 @@ class App extends Component {
   handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
   };
-  
-  AddProductHandler = (product) => {
-    // this.setState((prevState) => {
-    //   return { products: [product, ...prevState.products] };
-    // });
-    // this.setState({ products: [product, ...this.state.products] });
+
+  addProductHandler = (product) => {
+    fetch('/api/v1/product', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === 201) {
+          Toast.fire({
+            icon: 'success',
+            title: 'Added successfully',
+          });
+          this.fetchProducts();
+          this.showAndCloseModal('addDisplay');
+        }
+        if (data.status === 400) this.errHandler(data.message);
+      })
+      .catch((err) => {
+        if (err.status === 500) window.location.href = '/error';
+      });
+  };
+
+  updateProductHandler = (product, productId) => {
+    fetch(`/api/v1/product/${productId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === 201) {
+          Toast.fire({
+            icon: 'success',
+            title: 'Updated successfully',
+          });
+          this.fetchProducts();
+          this.showAndCloseModal('isEditing');
+          this.showAndCloseModal('addDisplay');
+        }
+        if (data.status === 400) this.errHandler(data.message);
+      })
+      .catch((err) => {
+        if (err.status === 500) window.location.href = '/error';
+      });
   };
 
   deleteProductHandler = () => {
@@ -145,8 +194,8 @@ class App extends Component {
         if (res.status === 200) {
           Toast.fire({
             icon: 'success',
-            title: 'Signed in successfully'
-          })          
+            title: 'Deleted successfully',
+          });
           this.setState((prevState) => ({
             products: prevState.products.filter(
               (product) => product.id !== productId
@@ -164,16 +213,8 @@ class App extends Component {
     this.setState({ errMessage: err });
   };
 
-  // alertHandler = (alert, state) => {
-  //   return(
-  //   <div>
-  //     <div className={`alert alert-${state}`}>
-  //       <p className='alert-text'>{alert}</p>
-  //   </div>)
-  // };
-
-  handleIdDelete = (id) => {
-    this.setState({ confirmToDeleteId: id });
+  handleState = (name, id) => {
+    this.setState({ [name]: id });
   };
 
   render() {
@@ -187,9 +228,10 @@ class App extends Component {
       sort,
       addDisplay,
       categories,
-      alertDisplay,
       confirmDisplay,
       cart,
+      isEditing,
+      currentProduct,
     } = this.state;
 
     return (
@@ -200,7 +242,6 @@ class App extends Component {
           }
         >
           {isLoading && <div>Loading...</div>}
-          {/* {alertDisplay && this.alertHandler} */}
           {loginDisplay && (
             <LoginForm
               isLoggedIn={isLoggedIn}
@@ -209,10 +250,14 @@ class App extends Component {
           )}
           {addDisplay && (
             <AddProductForm
+              handleState={this.handleState}
+              currentProduct={currentProduct}
+              isEditing={isEditing}
               errHandler={this.errHandler}
-              AddProductHandler={this.AddProductHandler}
+              addProductHandler={this.addProductHandler}
               categories={categories}
               showAndCloseModal={this.showAndCloseModal}
+              updateProductHandler={this.updateProductHandler}
             />
           )}
           {confirmDisplay && (
@@ -253,7 +298,7 @@ class App extends Component {
                   searchWords={searchWords}
                   products={products}
                   confirmDisplay={confirmDisplay}
-                  handleIdDelete={this.handleIdDelete}
+                  handleState={this.handleState}
                   addToCart={this.addToCart}
                 />
               )}

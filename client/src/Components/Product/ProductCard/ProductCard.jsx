@@ -5,13 +5,18 @@ export default function ProductCard({
   products,
   isLoggedIn,
   addToCart,
-  updateProduct,
   showAndCloseModal,
-  handleIdDelete,
+  handleState,
 }) {
   const deleteProduct = (id) => {
-    handleIdDelete(id);
+    handleState('confirmToDeleteId', id);
     showAndCloseModal('confirmDisplay');
+  };
+
+  const updateProduct = (product) => {
+    handleState('currentProduct', product);
+    showAndCloseModal('isEditing');
+    showAndCloseModal('addDisplay');
   };
   return (
     <Route>
@@ -44,7 +49,7 @@ export default function ProductCard({
                     </div>
                     <div
                       className="icon-wrap card-edit"
-                      onClick={() => updateProduct(id)}
+                      onClick={() => updateProduct(product)}
                     >
                       <i className="bx bx-edit"></i>
                     </div>

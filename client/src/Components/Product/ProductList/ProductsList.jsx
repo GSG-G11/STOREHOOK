@@ -8,7 +8,7 @@ export default function ProductsList({
   categorySelected,
   sort,
   showAndCloseModal,
-  handleIdDelete,
+  handleState,
   addToCart,
 }) {
   const filterProducts = () => {
@@ -32,7 +32,7 @@ export default function ProductsList({
     <section className="wrap-product-list">
       <div className="product-list">
         <ProductCard
-          handleIdDelete={handleIdDelete}
+          handleState={handleState}
           products={filterProducts()}
           isLoggedIn={isLoggedIn}
           showAndCloseModal={showAndCloseModal}

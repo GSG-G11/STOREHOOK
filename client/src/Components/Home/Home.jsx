@@ -12,7 +12,7 @@ export default class Home extends Component {
       sort,
       searchWords,
       products,
-      handleIdDelete,
+      handleState,
       addToCart,
     } = this.props;
     return (
@@ -27,7 +27,7 @@ export default class Home extends Component {
         />
         <ProductsList
           addToCart={addToCart}
-          handleIdDelete={handleIdDelete}
+          handleState={handleState}
           searchWords={searchWords}
           categorySelected={categorySelected}
           sort={sort}
