@@ -2,6 +2,7 @@
 <br />
 <div align="center">
   <a href="https://storehook.herokuapp.com/" target="_blank">
+
     <img src="https://cdn.discordapp.com/attachments/962473520124796973/963931495712567356/Group_135.jpg" alt="Logo" >
   </a>
 
@@ -11,6 +12,7 @@
     An e-commerce site for buying and selling electronics, food and clothing !
     <br />
     <br />
+
     <a href="https://storehook.herokuapp.com"> Demo</a>
     ·
     <a href="https://www.figma.com/file/HlwZEHHweE3t4EDr9Wlg5V/STOREHOOK?node-id=0%3A1%22%3EFigma">Desgin</a>

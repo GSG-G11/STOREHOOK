@@ -54,25 +54,35 @@ const Navbar = ({
               <div className="prod-cart-num">{sumitem}</div>
               <i className="bx bx-shopping-bag"></i>
             </div>
-          </Link>
-        </li>
+          </li>
 
-        <li>
-          {isLoggedIn ? (
-            <button className="btn-login" onClick={logout}>
-              Logout
-            </button>
-          ) : (
-            <button
-              className="btn-login"
-              onClick={() => showAndCloseModal('loginDisplay')}
-            >
-              Login
-            </button>
-          )}
-        </li>
-      </ul>
-    </nav>
+          <li>
+            <Link to="/cart">
+              <div className="icon-wrap">
+                <div className="prod-cart-num">{sumitem >=0 ? sumitem : 0}</div>
+                <i className="bx bx-shopping-bag"></i>
+              </div>
+            </Link>
+          </li>
+
+          <li>
+            {isLoggedIn ? (
+              <button className="btn-login btn-logout" onClick={logout}>
+                Logout
+              </button>
+            ) : (
+              <button
+                className="btn-login"
+                onClick={() => showAndCloseModal('loginDisplay')}
+              >
+                Login
+              </button>
+            )}
+          </li>
+        </ul>
+      </nav>
+    </Router>
+
   );
 };
 

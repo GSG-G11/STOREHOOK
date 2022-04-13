@@ -19,11 +19,11 @@ const Productcard = ({ cart, incretmentQun, decretmentQun, deleteCartProcuct}) =
             </div>
             <div className="card-action">
               <div className="incr icon-wrap" onClick={(id) => decretmentQun(cart.id)}> - </div>
-              <div className="qun-num"><p> {quantity} </p></div>
+              <div className="qun-num"><p> {quantity >= 1 ? quantity : 1} </p></div>
               <div className="dec icon-wrap" onClick={(id) => incretmentQun(cart.id)}> + </div>
           </div>
-          <div className="card-Price"> $ {totalPrice}</div>
-          <div className="card-delete" onClick={(id) => deleteCartProcuct(cart.id)}><i className='bx bx-x'></i></div>
+          <div className="card-Price"> $ {totalPrice >= 0 ? totalPrice : 0}</div>
+          <div className="card-delete" onClick={(id) => deleteCartProcuct(cart.id)}><i className='bx bx-x cart-x'></i></div>
           </div>
 
         </div>

@@ -82,3 +82,6 @@ a {
   height: 100vh;
   overflow: hidden;
 }
+div#root {
+  padding: 0 30px;
+}
