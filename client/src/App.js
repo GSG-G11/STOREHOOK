@@ -1,7 +1,16 @@
 import { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Navbar, ProductsList, ListofCardproducts } from './Components';
+import {
+  Navbar,
+  Home,
+  ProductDetails,
+  AddProductForm,
+  LoginForm,
+  ConfirmModal,
+  ListofCardproducts
+} from './Components';
+
 class App extends Component {
   state = {
     products: [],
@@ -12,6 +21,12 @@ class App extends Component {
     cart: JSON.parse(localStorage.getItem('cart')) || [],
     isLoggedIn: JSON.parse(localStorage.getItem('isLoggedIn')) || false,
     isLoading: true,
+    searchWords: '',
+    categorySelected: 'All',
+    sort: 'Newest',
+    categories: [],
+    errMessage: '',
+    confirmToDeleteId: 0,
   };
 
   componentDidMount() {
@@ -20,6 +35,14 @@ class App extends Component {
       .then((res) => {
         if (res.status === 200)
           this.setState({ products: res.data, isLoading: false });
+      })
+      .catch((err) => {
+        if (err.status === 500) window.location.href = '/error';
+      });
+        fetch('/api/v1/categories')
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 200) this.setState({ categories: res.data });
       })
       .catch((err) => {
         if (err.status === 500) window.location.href = '/error';
@@ -80,46 +103,113 @@ class App extends Component {
     localStorage.setItem('cart', JSON.stringify(cartarr))
   }
 
-  // addProduct = (e) => {
-  //   e.preventDefault();
-  //   const { name, description, category, price, image } = e.target;
-  //   const product = {
-  //     name: name.value,
-  //     description: description.value,
-  //     category: category.value,
-  //     price: price.value,
-  //     image: image.value,
-  //   };
-
-  //   fetch('/api/v1/product', {
-  //     headers: { method: 'POST' },
-  //     body: JSON.stringify(product),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       if (res.status === 201) this.showAndCloseModal('alertDisplay');
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       if (err.status === 500) window.location.href = '/error';
-  //     });
-  //   this.showAndCloseModal('addDisplay');
-  // };
-
   showAndCloseModal = (modal) => {
     this.setState((preState) => {
       return { [modal]: !preState[modal] };
     });
   };
 
+  handleChange = ({ target: { name, value } }) => {
+    this.setState({ [name]: value });
+  };
+
+  AddProductHandler = (product) => {
+    // this.setState((prevState) => {
+    //   return { products: [product, ...prevState.products] };
+    // });
+    // this.setState({ products: [product, ...this.state.products] });
+  };
+
+  deleteProductHandler = () => {
+    const productId = this.state.confirmToDeleteId;
+    fetch(`/api/v1/product/${productId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 200) {
+          this.setState((prevState) => ({
+            products: prevState.products.filter(
+              (product) => product.id !== productId
+            ),
+            confirmDisplay: false,
+          }));
+        }
+      })
+      .catch((err) => {
+        if (err.status === 500) window.location.href = '/error';
+      });
+  };
+
+  errHandler = (err) => {
+    this.setState({ errMessage: err });
+  };
+
+  // alertHandler = (alert, state) => {
+  //   return(
+  //   <div>
+  //     <div className={`alert alert-${state}`}>
+  //       <p className='alert-text'>{alert}</p>
+  //   </div>)
+  // };
+
+  handleIdDelete = (id) => {
+    this.setState({ confirmToDeleteId: id });
+  };
+
   render() {
-    const { products, isLoggedIn, isLoading, cart } = this.state;
+    const {
+      products,
+      isLoggedIn,
+      isLoading,
+      loginDisplay,
+      searchWords,
+      categorySelected,
+      sort,
+      addDisplay,
+      categories,
+      alertDisplay,
+      confirmDisplay,
+      cart,
+    } = this.state;
+
     return (
       <Router>
-        <div>
+        <div
+          className={
+            addDisplay || loginDisplay || confirmDisplay ? 'root-container' : ''
+          }
+        >
+          {isLoading && <div>Loading...</div>}
+          {/* {alertDisplay && this.alertHandler} */}
+          {loginDisplay && (
+            <LoginForm
+              isLoggedIn={isLoggedIn}
+              showAndCloseModal={this.showAndCloseModal}
+            />
+          )}
+          {addDisplay && (
+            <AddProductForm
+              errHandler={this.errHandler}
+              AddProductHandler={this.AddProductHandler}
+              categories={categories}
+              showAndCloseModal={this.showAndCloseModal}
+            />
+          )}
+          {confirmDisplay && (
+            <ConfirmModal
+              deleteProductHandler={this.deleteProductHandler}
+              showAndCloseModal={this.showAndCloseModal}
+            />
+          )}
           <Navbar
+            handleChange={this.handleChange}
+            searchWords={searchWords}
             isLoggedIn={isLoggedIn}
-            showLoginModal={this.showAndCloseModal}
+            showAndCloseModal={this.showAndCloseModal}
             cart={cart}
           />
           {isLoading && <div>Loading...</div>}
@@ -128,9 +218,25 @@ class App extends Component {
             <Route path="/cart">
               <ListofCardproducts cart={cart} incretmentQun= {this.incretmentQunPrice} decretmentQun= {this.decretmentQunPrice} deleteCartProcuct={this.deleteCartProcuct}/>
             </Route>
-            <Route exact path="/">
-              <ProductsList products={products} isLoggedIn={isLoggedIn} addToCart={this.addToCart}/>
-            </Route>
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <Home
+                  categories={categories}
+                  showAndCloseModal={this.showAndCloseModal}
+                  isLoggedIn={isLoggedIn}
+                  handleChange={this.handleChange}
+                  categorySelected={categorySelected}
+                  sort={sort}
+                  searchWords={searchWords}
+                  products={products}
+                  confirmDisplay={confirmDisplay}
+                  handleIdDelete={this.handleIdDelete}
+                />
+              )}
+            />
+            <Route path="/product/:id" component={ProductDetails} />
           </Switch>
         </div>
       </Router>

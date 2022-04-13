@@ -1,13 +1,17 @@
-const addProductQuery = require('./addProductQuery');
-const deleteProductQuery = require('./deleteProductQuery');
-const allProductsQuery = require('./getProductsQuery');
-const getSingleProductQuery = require('./getSingleProductQuery');
-const updateProductQuery = require('./updateProductQuery');
+const {
+  addProductQuery,
+  deleteProductQuery,
+  allProductsQuery,
+  getSingleProductQuery,
+  updateProductQuery,
+} = require('./products');
+const { getCategoriesQuery } = require('./categories');
 
-module.exports ={
-    addProductQuery,
-    deleteProductQuery,
-    allProductsQuery,
-    getSingleProductQuery,
-    updateProductQuery
-}
+module.exports = {
+  addProductQuery,
+  deleteProductQuery,
+  allProductsQuery,
+  getSingleProductQuery,
+  updateProductQuery,
+  getCategoriesQuery,
+};

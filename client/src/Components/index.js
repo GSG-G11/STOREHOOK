@@ -1,6 +1,18 @@
 import Navbar from './Navbar';
-import { ProductsList } from './Product';
+import { ProductsList, ProductDetails } from './Product';
 import { ListofCardproducts } from './Cart';
-import AddproductForm from "./Forms/AddProduct/AddproductForm";
+import { LoginForm, AddProductForm, ConfirmModal } from './Forms';
+import Home from './Home';
+import Filters from './Filters';
 
-export { Navbar, ProductsList, AddproductForm, ListofCardproducts };
+export {
+  Navbar,
+  ProductsList,
+  LoginForm,
+  Filters,
+  AddProductForm,
+  ProductDetails,
+  Home,
+  ConfirmModal,
+  ListofCardproducts,
+};
