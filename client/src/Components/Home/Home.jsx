@@ -13,6 +13,7 @@ export default class Home extends Component {
       searchWords,
       products,
       handleIdDelete,
+      addToCart,
     } = this.props;
     return (
       <div>
@@ -25,6 +26,7 @@ export default class Home extends Component {
           sort={sort}
         />
         <ProductsList
+          addToCart={addToCart}
           handleIdDelete={handleIdDelete}
           searchWords={searchWords}
           categorySelected={categorySelected}
