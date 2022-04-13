@@ -8,6 +8,7 @@ import {
   AddProductForm,
   LoginForm,
   ConfirmModal,
+  ListofCardproducts
 } from './Components';
 
 class App extends Component {
@@ -38,8 +39,7 @@ class App extends Component {
       .catch((err) => {
         if (err.status === 500) window.location.href = '/error';
       });
-
-    fetch('/api/v1/categories')
+        fetch('/api/v1/categories')
       .then((res) => res.json())
       .then((res) => {
         if (res.status === 200) this.setState({ categories: res.data });
@@ -47,6 +47,60 @@ class App extends Component {
       .catch((err) => {
         if (err.status === 500) window.location.href = '/error';
       });
+  }
+
+  addToCart = (product) => {
+    const { cart } = this.state;
+    let newpord;
+
+    console.log(product , 'dadf');
+
+    cart.map((pro) => {
+    if(pro.id === product.id){
+      pro.quantity += 1
+      pro.totalPrice += pro.price
+      newpord = pro;
+      return newpord;
+    }
+      return pro
+    })
+
+    if(!newpord){
+      cart.push({...product , quantity: 1, totalPrice: product.price })
+    }
+
+    this.setState({cart: cart})
+    localStorage.setItem('cart', JSON.stringify(cart))
+  }
+
+
+  decretmentQunPrice = (id) => {
+    const { cart } = this.state;
+    cart.forEach((pro) => {
+      if(pro.id === id){
+        pro.quantity -= 1
+        pro.totalPrice -= pro.price
+        this.setState({cart: cart})
+        localStorage.setItem('cart', JSON.stringify(cart))
+      }
+    })
+  }
+
+  incretmentQunPrice = (id) => {
+    const { cart } = this.state;
+    cart.forEach((pro) => {
+      if(pro.id === id){
+        pro.quantity += 1
+        pro.totalPrice += pro.price
+        this.setState({cart: cart})
+        localStorage.setItem('cart', JSON.stringify(cart))
+      }
+    })
+  }
+  deleteCartProcuct = (id) => {
+    const cartarr = JSON.parse(localStorage.getItem('cart')).filter((pro) => pro.id !== id)
+    this.setState({cart : cartarr})
+    localStorage.setItem('cart', JSON.stringify(cartarr))
   }
 
   showAndCloseModal = (modal) => {
@@ -119,7 +173,9 @@ class App extends Component {
       categories,
       alertDisplay,
       confirmDisplay,
+      cart,
     } = this.state;
+
     return (
       <Router>
         <div
@@ -154,8 +210,14 @@ class App extends Component {
             searchWords={searchWords}
             isLoggedIn={isLoggedIn}
             showAndCloseModal={this.showAndCloseModal}
+            cart={cart}
           />
+          {isLoading && <div>Loading...</div>}
+
           <Switch>
+            <Route path="/cart">
+              <ListofCardproducts cart={cart} incretmentQun= {this.incretmentQunPrice} decretmentQun= {this.decretmentQunPrice} deleteCartProcuct={this.deleteCartProcuct}/>
+            </Route>
             <Route
               exact
               path="/"

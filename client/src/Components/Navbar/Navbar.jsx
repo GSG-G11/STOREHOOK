@@ -15,6 +15,12 @@ const Navbar = ({
     showAndCloseModal('isLoggedIn');
   };
 
+    let cartarr = localStorage.getItem("cart");
+  let sumitem;
+  if(cartarr && cartarr.length > 0){
+    sumitem = JSON.parse(cartarr).map((c) => c.quantity).reduce((prev, cur) => prev + cur, 0)
+  }
+
   return (
     <Router>
       <nav className="navbar">
@@ -44,7 +50,7 @@ const Navbar = ({
           <li>
             <Link to="/cart">
               <div className="icon-wrap">
-                <span className="prod-cart-num"></span>
+                <div className="prod-cart-num">{sumitem}</div>
                 <i className="bx bx-shopping-bag"></i>
               </div>
             </Link>

@@ -9,6 +9,7 @@ export default function ProductsList({
   sort,
   showAndCloseModal,
   handleIdDelete,
+  addToCart,
 }) {
   const filterProducts = () => {
     let filteredProducts = products;
@@ -35,6 +36,7 @@ export default function ProductsList({
           products={filterProducts()}
           isLoggedIn={isLoggedIn}
           showAndCloseModal={showAndCloseModal}
+          addToCart={addToCart}
         />
       </div>
     </section>

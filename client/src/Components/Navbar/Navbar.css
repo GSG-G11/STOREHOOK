@@ -49,6 +49,22 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  position: relative;
+}
+.prod-cart-num {
+  position: absolute;
+  left: 49.38%;
+  right: 0%;
+  top: 9%;
+  bottom: 41.38%;
+  background: #2CB674;
+  width: 40%;
+  height: 40%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
 }
 
 .btn-login {

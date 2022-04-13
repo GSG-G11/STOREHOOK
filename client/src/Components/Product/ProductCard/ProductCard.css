@@ -51,12 +51,16 @@
   height: 240px;
   transition: all 0.4s ease-in-out;
 }
+.product-img.card-img {
+  width: 50%;
+}
 
 .product-info {
   margin-top: 10px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  align-items: center;
 }
 
 .product-name {
@@ -67,7 +71,9 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
-
+.cart-name{
+  margin-bottom: 4%;
+}
 .product-price {
   margin-top: 5px;
   font-weight: 500;
