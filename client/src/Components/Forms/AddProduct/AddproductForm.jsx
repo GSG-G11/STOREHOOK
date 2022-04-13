@@ -98,8 +98,11 @@ const AddProductForm = ({
               <select
                 name="category"
                 defaultValue={
-                  categories.filter((cate) => cate.name === defaultCategory)[0]
-                    .id
+                  isEditing
+                    ? categories.filter(
+                        (cate) => cate.name === defaultCategory
+                      )[0].id
+                    : 'Electronics'
                 }
                 className="form-control"
               >
