@@ -4,6 +4,7 @@ import { ListofCardproducts } from './Cart';
 import { LoginForm, AddProductForm, ConfirmModal } from './Forms';
 import Home from './Home';
 import Filters from './Filters';
+import NotFound from './NotFound';
 
 export {
   Navbar,
@@ -15,4 +16,5 @@ export {
   Home,
   ConfirmModal,
   ListofCardproducts,
+  NotFound
 };

@@ -50,7 +50,7 @@ const Navbar = ({
           <li>
             <Link to="/cart">
               <div className="icon-wrap">
-                <div className="prod-cart-num">{sumitem}</div>
+                <div className="prod-cart-num">{sumitem >=0 ? sumitem : 0}</div>
                 <i className="bx bx-shopping-bag"></i>
               </div>
             </Link>
@@ -58,7 +58,7 @@ const Navbar = ({
 
           <li>
             {isLoggedIn ? (
-              <button className="btn-login" onClick={logout}>
+              <button className="btn-login btn-logout" onClick={logout}>
                 Logout
               </button>
             ) : (

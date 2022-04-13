@@ -1,0 +1,20 @@
+.notfound-cover{
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+button.btn.btn-primary.notfound {
+  background-color: #2cb674;
+  color: #fff;
+  margin-top: 2%;
+  padding: 0 40px;
+}
+button.btn.btn-primary.notfound a{
+  color: #fff !important;
+}
+h1.cover-heading {
+  margin-bottom: 2%;
+  margin-top: 2%;
+}

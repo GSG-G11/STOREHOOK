@@ -3,12 +3,15 @@ import Productcard from "./Productcard";
 import "./cart.css";
 import { BrowserRouter as Router } from "react-router-dom";
 
-function ListofCardproducts({ cart, incretmentQun, decretmentQun, deleteCartProcuct }) {
+function ListofCardproducts({ cart, incretmentQun, decretmentQun, deleteCartProcuct, removeAllItem }) {
   let cartarr = localStorage.getItem("cart");
   let sumitem;
+  let sumprice;
+  console.log(cart);
 
   if(cartarr && cartarr.length > 0){
     sumitem = JSON.parse(cartarr).map((c) => c.quantity).reduce((prev, cur) => prev + cur, 0)
+    sumprice = JSON.parse(cartarr).map((c) => c.totalPrice).reduce((prev, cur) => prev + cur, 0)
   }
 
   return (
@@ -37,12 +40,12 @@ function ListofCardproducts({ cart, incretmentQun, decretmentQun, deleteCartProc
                 <h2>Card Total</h2>
                 <div className="total-head">
                   <p>Cart Subtotal</p>
-                  <p>${cart[0].price}</p>
+                  <p>${sumprice >= 0  ? sumprice : 0}</p>
                 </div>
                 <div className="total-pay-btn">
                   <div className="together-div">
                     <button type="button" className="btn btn-primary">
-                      <p>Together To pay</p> <p>$53.33</p>
+                      <p>Together To pay</p> <p>${sumprice >= 0 ? sumprice : 0}</p>
                     </button>
                   </div>
                   <div className="checkout-div">
@@ -51,8 +54,8 @@ function ListofCardproducts({ cart, incretmentQun, decretmentQun, deleteCartProc
                     </button>
                   </div>
                   <div className="empty-div">
-                    <button type="button" className="btn btn-primary">
-                      Empty Cart{" "}
+                    <button type="button" className="btn btn-primary" onClick={removeAllItem}>
+                      Empty Cart
                     </button>
                   </div>
                 </div>

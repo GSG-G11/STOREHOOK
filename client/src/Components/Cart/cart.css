@@ -107,3 +107,10 @@ i.bx.bx-cart-alt {
   font-size: 28px;
   margin-right: 1%;
 }
+i.bx.bx-x.cart-x {
+  font-size: 24px;
+  color: #009688;
+}
+i.bx.bx-x.cart-x:hover{
+  color: red;
+}

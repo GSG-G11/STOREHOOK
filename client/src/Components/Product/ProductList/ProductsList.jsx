@@ -1,5 +1,6 @@
 import ProductCard from '../ProductCard';
 import './ProductsList.css';
+import { NotFound } from '../../../Components';
 
 export default function ProductsList({
   isLoggedIn,
@@ -10,6 +11,7 @@ export default function ProductsList({
   showAndCloseModal,
   handleState,
   addToCart,
+
 }) {
   const filterProducts = () => {
     let filteredProducts = products;
@@ -30,8 +32,9 @@ export default function ProductsList({
 
   return (
     <section className="wrap-product-list">
+      {filterProducts().length === 0 ? (<NotFound isNotFoundPage={false} />) : (
       <div className="product-list">
-        <ProductCard
+          <ProductCard
           handleState={handleState}
           products={filterProducts()}
           isLoggedIn={isLoggedIn}
@@ -39,6 +42,8 @@ export default function ProductsList({
           addToCart={addToCart}
         />
       </div>
+      )}
+
     </section>
   );
 }

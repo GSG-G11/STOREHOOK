@@ -58,13 +58,15 @@
   top: 9%;
   bottom: 41.38%;
   background: #2CB674;
-  width: 40%;
-  height: 40%;
+  width: 38%;
+  height: 38%;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 800;
 }
 
 .btn-login {
@@ -75,7 +77,18 @@
   height: 50px;
   cursor: pointer;
 }
-
+.btn-logout{
+  background-color: #fff;
+  color: var(--font);
+  border: 1px solid var(--icon);
+  padding: 0 30px;
+  border-radius: 150px;
+  height: 50px;
+  cursor: pointer;
+}
+.btn-logout:hover{
+  background-color: var(--icon);
+}
 .btn:hover {
   filter: brightness(95%);
 }
