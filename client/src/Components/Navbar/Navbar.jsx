@@ -3,11 +3,16 @@ import { Link, BrowserRouter as Router, Redirect } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../../images/logo.svg';
 
-const Navbar = ({ isLoggedIn, showLoginModal, searchWords, handleChange }) => {
+const Navbar = ({
+  isLoggedIn,
+  showAndCloseModal,
+  searchWords,
+  handleChange,
+}) => {
   const logout = () => {
     localStorage.setItem('isLoggedIn', false);
     localStorage.setItem('user', JSON.stringify({}));
-    showLoginModal('isLoggedIn');
+    showAndCloseModal('isLoggedIn');
   };
 
   return (
@@ -53,7 +58,7 @@ const Navbar = ({ isLoggedIn, showLoginModal, searchWords, handleChange }) => {
             ) : (
               <button
                 className="btn-login"
-                onClick={() => showLoginModal('loginDisplay')}
+                onClick={() => showAndCloseModal('loginDisplay')}
               >
                 Login
               </button>
