@@ -12,7 +12,8 @@ export default class Home extends Component {
       sort,
       searchWords,
       products,
-      handleIdDelete,
+      handleState,
+      addToCart,
     } = this.props;
     return (
       <div>
@@ -25,7 +26,8 @@ export default class Home extends Component {
           sort={sort}
         />
         <ProductsList
-          handleIdDelete={handleIdDelete}
+          addToCart={addToCart}
+          handleState={handleState}
           searchWords={searchWords}
           categorySelected={categorySelected}
           sort={sort}
