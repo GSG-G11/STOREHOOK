@@ -1,9 +1,15 @@
 import ProductCard from '../ProductCard';
 import './ProductsList.css';
 
-export default function ProductsList(props) {
-  const { isLoggedIn, products, searchWords, categorySelected, sort } = props;
-
+export default function ProductsList({
+  isLoggedIn,
+  products,
+  searchWords,
+  categorySelected,
+  sort,
+  showAndCloseModal,
+  handleIdDelete,
+}) {
   const filterProducts = () => {
     let filteredProducts = products;
     if (searchWords.length !== 0)
@@ -24,7 +30,12 @@ export default function ProductsList(props) {
   return (
     <section className="wrap-product-list">
       <div className="product-list">
-        <ProductCard products={filterProducts()} isLoggedIn={isLoggedIn} />
+        <ProductCard
+          handleIdDelete={handleIdDelete}
+          products={filterProducts()}
+          isLoggedIn={isLoggedIn}
+          showAndCloseModal={showAndCloseModal}
+        />
       </div>
     </section>
   );

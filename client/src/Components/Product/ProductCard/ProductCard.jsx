@@ -1,23 +1,24 @@
-import { Link, BrowserRouter as Router, Route } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import './ProductCard.css';
 
 export default function ProductCard({
   products,
   isLoggedIn,
-  deleteProduct,
   addToCart,
   updateProduct,
+  showAndCloseModal,
+  handleIdDelete,
 }) {
+  const deleteProduct = (id) => {
+    handleIdDelete(id);
+    showAndCloseModal('confirmDisplay');
+  };
   return (
     <Route>
       <>
         {isLoggedIn
           ? products.map((product) => {
               const { id, name, price, image, category } = product;
-              if (isNaN(category)) {
-                console.log('category is number');
-              }
-
               return (
                 <div className="product-card" key={id || Date.now()}>
                   <div className="wrap-img">

@@ -1,3 +1,3 @@
-import AddProductForm from './AddProductForm';
+import AddProductForm from './AddproductForm';
 
 export default AddProductForm;

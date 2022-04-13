@@ -1,4 +1,4 @@
 import ProductsList from './ProductList';
-import ProductDetails from './ProductDetails/ProductDetails';
+import ProductDetails from './Productdetails';
 
 export { ProductsList, ProductDetails };

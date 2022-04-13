@@ -12,6 +12,7 @@ export default class Home extends Component {
       sort,
       searchWords,
       products,
+      handleIdDelete,
     } = this.props;
     return (
       <div>
@@ -24,11 +25,13 @@ export default class Home extends Component {
           sort={sort}
         />
         <ProductsList
+          handleIdDelete={handleIdDelete}
           searchWords={searchWords}
           categorySelected={categorySelected}
           sort={sort}
           products={products}
           isLoggedIn={isLoggedIn}
+          showAndCloseModal={showAndCloseModal}
         />
       </div>
     );

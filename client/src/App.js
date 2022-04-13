@@ -7,6 +7,7 @@ import {
   ProductDetails,
   AddProductForm,
   LoginForm,
+  ConfirmModal,
 } from './Components';
 
 class App extends Component {
@@ -24,6 +25,7 @@ class App extends Component {
     sort: 'Newest',
     categories: [],
     errMessage: '',
+    confirmToDeleteId: 0,
   };
 
   componentDidMount() {
@@ -64,6 +66,30 @@ class App extends Component {
     // this.setState({ products: [product, ...this.state.products] });
   };
 
+  deleteProductHandler = () => {
+    const productId = this.state.confirmToDeleteId;
+    fetch(`/api/v1/product/${productId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 200) {
+          this.setState((prevState) => ({
+            products: prevState.products.filter(
+              (product) => product.id !== productId
+            ),
+            confirmDisplay: false,
+          }));
+        }
+      })
+      .catch((err) => {
+        if (err.status === 500) window.location.href = '/error';
+      });
+  };
+
   errHandler = (err) => {
     this.setState({ errMessage: err });
   };
@@ -75,6 +101,10 @@ class App extends Component {
   //       <p className='alert-text'>{alert}</p>
   //   </div>)
   // };
+
+  handleIdDelete = (id) => {
+    this.setState({ confirmToDeleteId: id });
+  };
 
   render() {
     const {
@@ -88,10 +118,15 @@ class App extends Component {
       addDisplay,
       categories,
       alertDisplay,
+      confirmDisplay,
     } = this.state;
     return (
       <Router>
-        <div className={addDisplay || loginDisplay ? 'root-container' : ''}>
+        <div
+          className={
+            addDisplay || loginDisplay || confirmDisplay ? 'root-container' : ''
+          }
+        >
           {isLoading && <div>Loading...</div>}
           {/* {alertDisplay && this.alertHandler} */}
           {loginDisplay && (
@@ -108,11 +143,17 @@ class App extends Component {
               showAndCloseModal={this.showAndCloseModal}
             />
           )}
+          {confirmDisplay && (
+            <ConfirmModal
+              deleteProductHandler={this.deleteProductHandler}
+              showAndCloseModal={this.showAndCloseModal}
+            />
+          )}
           <Navbar
             handleChange={this.handleChange}
             searchWords={searchWords}
             isLoggedIn={isLoggedIn}
-            showLoginModal={this.showAndCloseModal}
+            showAndCloseModal={this.showAndCloseModal}
           />
           <Switch>
             <Route
@@ -128,6 +169,8 @@ class App extends Component {
                   sort={sort}
                   searchWords={searchWords}
                   products={products}
+                  confirmDisplay={confirmDisplay}
+                  handleIdDelete={this.handleIdDelete}
                 />
               )}
             />
