@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import './App.css';
+import Swal from 'sweetalert2'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import {
   Navbar,
@@ -10,7 +11,17 @@ import {
   ConfirmModal,
   ListofCardproducts,
 } from './Components';
-
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
 class App extends Component {
   state = {
     products: [],
@@ -113,7 +124,7 @@ class App extends Component {
   handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
   };
-
+  
   AddProductHandler = (product) => {
     // this.setState((prevState) => {
     //   return { products: [product, ...prevState.products] };
@@ -132,6 +143,10 @@ class App extends Component {
       .then((res) => res.json())
       .then((res) => {
         if (res.status === 200) {
+          Toast.fire({
+            icon: 'success',
+            title: 'Signed in successfully'
+          })          
           this.setState((prevState) => ({
             products: prevState.products.filter(
               (product) => product.id !== productId
