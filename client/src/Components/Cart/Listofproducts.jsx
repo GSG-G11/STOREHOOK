@@ -2,16 +2,24 @@ import React from 'react';
 import Productcard from './Productcard';
 import './cart.css';
 
-
-function ListofCardproducts({ cart, incretmentQun, decretmentQun, deleteCartProcuct, removeAllItem }) {
-  let cartarr = localStorage.getItem("cart");
+function ListofCardproducts({
+  cart,
+  incretmentQun,
+  decretmentQun,
+  deleteCartProcuct,
+  removeAllItem,
+}) {
+  let cartarr = localStorage.getItem('cart');
   let sumitem;
   let sumprice;
-  console.log(cart);
 
-  if(cartarr && cartarr.length > 0){
-    sumitem = JSON.parse(cartarr).map((c) => c.quantity).reduce((prev, cur) => prev + cur, 0)
-    sumprice = JSON.parse(cartarr).map((c) => c.totalPrice).reduce((prev, cur) => prev + cur, 0)
+  if (cartarr && cartarr.length > 0) {
+    sumitem = JSON.parse(cartarr)
+      .map((c) => c.quantity)
+      .reduce((prev, cur) => prev + cur, 0);
+    sumprice = JSON.parse(cartarr)
+      .map((c) => c.totalPrice)
+      .reduce((prev, cur) => prev + cur, 0);
   }
 
   return (
@@ -39,30 +47,28 @@ function ListofCardproducts({ cart, incretmentQun, decretmentQun, deleteCartProc
               <h2>Card Total</h2>
               <div className="total-head">
                 <p>Cart Subtotal</p>
-                <p>${cart[0].price}</p>
+                <p>${sumprice >= 0 ? sumprice : 0}</p>
               </div>
-              <div className="jumbotron">
-                <h2>Card Total</h2>
-                <div className="total-head">
-                  <p>Cart Subtotal</p>
-                  <p>${sumprice >= 0  ? sumprice : 0}</p>
+              <div className="total-pay-btn">
+                <div className="together-div">
+                  <button type="button" className="btn btn-primary">
+                    <p>Together To pay</p>{' '}
+                    <p>${sumprice >= 0 ? sumprice : 0}</p>
+                  </button>
                 </div>
-                <div className="total-pay-btn">
-                  <div className="together-div">
-                    <button type="button" className="btn btn-primary">
-                      <p>Together To pay</p> <p>${sumprice >= 0 ? sumprice : 0}</p>
-                    </button>
-                  </div>
-                  <div className="checkout-div">
-                    <button type="button" className="btn btn-primary">
-                      Proceed to Checkout
-                    </button>
-                  </div>
-                  <div className="empty-div">
-                    <button type="button" className="btn btn-primary" onClick={removeAllItem}>
-                      Empty Cart
-                    </button>
-                  </div>
+                <div className="checkout-div">
+                  <button type="button" className="btn btn-primary">
+                    Proceed to Checkout
+                  </button>
+                </div>
+                <div className="empty-div">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={removeAllItem}
+                  >
+                    Empty Cart
+                  </button>
                 </div>
               </div>
             </div>

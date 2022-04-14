@@ -15,6 +15,10 @@
   width: 40%;
 }
 
+.search:hover {
+  filter: brightness(98%);
+}
+
 .search-input {
   width: 100%;
   padding-left: 40px;
@@ -51,20 +55,21 @@
   cursor: pointer;
   position: relative;
 }
+
 .prod-cart-num {
   position: absolute;
   left: 49.38%;
   right: 0%;
   top: 9%;
   bottom: 41.38%;
-  background: #2CB674;
+  background: #2cb674;
   width: 38%;
   height: 38%;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 12px;
   font-weight: 800;
 }
@@ -77,7 +82,7 @@
   height: 50px;
   cursor: pointer;
 }
-.btn-logout{
+.btn-logout {
   background-color: #fff;
   color: var(--font);
   border: 1px solid var(--icon);
@@ -86,9 +91,15 @@
   height: 50px;
   cursor: pointer;
 }
-.btn-logout:hover{
+
+.btn-logout:hover {
   background-color: var(--icon);
 }
+
 .btn:hover {
+  filter: brightness(95%);
+}
+
+.cart-icon:hover {
   filter: brightness(95%);
 }

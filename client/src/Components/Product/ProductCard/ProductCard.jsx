@@ -43,7 +43,9 @@ export default function ProductCard({
                 </div>
                 <div className="product-info">
                   <div className="wrap-name-price">
-                    <p className="product-name">{name}</p>
+                    <Link to={`/product/${id}`}>
+                      <p className="product-name">{name}</p>
+                    </Link>
                     <p className="product-price">${price}</p>
                   </div>
                   <div

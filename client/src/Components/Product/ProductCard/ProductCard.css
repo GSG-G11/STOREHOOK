@@ -51,8 +51,13 @@
   height: 240px;
   transition: all 0.4s ease-in-out;
 }
+
 .product-img.card-img {
   width: 50%;
+}
+
+.product-img:hover {
+  transform: scale(1.08);
 }
 
 .product-info {
@@ -71,7 +76,7 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
-.cart-name{
+.cart-name {
   margin-bottom: 4%;
 }
 .product-price {
