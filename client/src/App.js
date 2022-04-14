@@ -247,7 +247,6 @@ class App extends Component {
             addDisplay || loginDisplay || confirmDisplay ? 'root-container' : ''
           }
         >
-          {isLoading && <div>Loading...</div>}
           {loginDisplay && (
             <LoginForm
               isLoggedIn={isLoggedIn}

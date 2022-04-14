@@ -48,14 +48,8 @@ const Navbar = ({
           </div>
         </li>
 
-        <li>
-          <Link to="/cart">
-            <div className="icon-wrap">
-              <div className="prod-cart-num">{sumitem}</div>
-              <i className="bx bx-shopping-bag"></i>
-            </div>
-          </li>
-
+        
+          
           <li>
             <Link to="/cart">
               <div className="icon-wrap">
@@ -81,7 +75,6 @@ const Navbar = ({
           </li>
         </ul>
       </nav>
-    </Router>
 
   );
 };
