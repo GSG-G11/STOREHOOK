@@ -49,6 +49,7 @@ ul {
 }
 
 select {
+  cursor: pointer;
   font-family: 'Red Hat Display', sans-serif;
 }
 
@@ -82,6 +83,6 @@ a {
   height: 100vh;
   overflow: hidden;
 }
-div#root {
+.app-root-container {
   padding: 0 30px;
 }

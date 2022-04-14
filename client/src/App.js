@@ -1,7 +1,12 @@
 import { Component } from 'react';
 import './App.css';
 import Swal from 'sweetalert2';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import {
   Navbar,
   Home,
@@ -10,7 +15,7 @@ import {
   LoginForm,
   ConfirmModal,
   ListofCardproducts,
-  NotFound
+  NotFound,
 } from './Components';
 
 const Toast = Swal.mixin({
@@ -114,9 +119,9 @@ class App extends Component {
   };
 
   removeAllItem = () => {
-    this.setState({ cart: []})
+    this.setState({ cart: [] });
     localStorage.removeItem('cart');
-  }
+  };
 
   deleteCartProcuct = (id) => {
     const cartarr = JSON.parse(localStorage.getItem('cart')).filter(
@@ -244,7 +249,9 @@ class App extends Component {
       <Router>
         <div
           className={
-            addDisplay || loginDisplay || confirmDisplay ? 'root-container' : ''
+            addDisplay || loginDisplay || confirmDisplay
+              ? 'root-container app-root-container'
+              : 'app-root-container'
           }
         >
           {loginDisplay && (
@@ -287,7 +294,7 @@ class App extends Component {
                 incretmentQun={this.incretmentQunPrice}
                 decretmentQun={this.decretmentQunPrice}
                 deleteCartProcuct={this.deleteCartProcuct}
-                removeAllItem = {this.removeAllItem}
+                removeAllItem={this.removeAllItem}
               />
             </Route>
             <Route path="/product/:id" component={ProductDetails} />
@@ -310,9 +317,7 @@ class App extends Component {
                 />
               )}
             />
-            <Route path='*' render={() => (
-              <NotFound isNotFoundPage={true} />
-            )} />
+            <Route path="*" render={() => <NotFound isNotFoundPage={true} />} />
           </Switch>
         </div>
       </Router>
