@@ -24,7 +24,7 @@ const Productcard = ({
             <div className="card-action">
               <div
                 className="incr icon-wrap"
-                onClick={(id) => decretmentQun(cart.id)}
+                onClick={quantity > 1 ? () => decretmentQun(cart.id) : null}
               >
                 {' '}
                 -{' '}
