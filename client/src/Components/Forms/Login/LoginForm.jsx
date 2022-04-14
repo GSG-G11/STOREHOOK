@@ -18,7 +18,6 @@ class Login extends Component {
       email: email.value,
       password: password.value,
     };
-    console.log(user);
     localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('isLoggedIn', true);
     this.props.showAndCloseModal('isLoggedIn');

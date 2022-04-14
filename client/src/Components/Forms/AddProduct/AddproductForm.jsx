@@ -8,6 +8,7 @@ const AddProductForm = ({
   isEditing,
   currentProduct,
   handleState,
+  errMessage,
 }) => {
   let productId = '';
   let defaultName = '';
@@ -70,6 +71,7 @@ const AddProductForm = ({
           </div>
         </div>
         <div className="form-bg">
+          <p className="err-message">{errMessage}</p>
           <form onSubmit={addProduct}>
             <div className="form-group">
               <label>Name</label>
