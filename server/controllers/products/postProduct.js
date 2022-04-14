@@ -1,6 +1,6 @@
 const { addProductQuery } = require('../../database/queries');
 const { productValidation } = require('../../utils');
-const { customError } = require('../../errors');
+// const { customError } = require('../../errors');
 
 const addProductHandler = (req, res, next) => {
   const {
@@ -19,7 +19,15 @@ const addProductHandler = (req, res, next) => {
       status: 201,
       data: data.rows[0],
     }))
-    .catch((err) => err.details ? next(customError(err.details[0].message, 400)) : next(err));
+    .catch((err) => {
+      // if (err.details) next(customError(err.details[0].message, 400));
+      if (err.details) {
+        res.json({
+          message: err.details[0].message,
+          status: 400,
+        });
+      } else next(err);
+    });
 };
 
 module.exports = addProductHandler;

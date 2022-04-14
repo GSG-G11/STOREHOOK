@@ -16,6 +16,7 @@ import {
   ConfirmModal,
   ListofCardproducts,
   NotFound,
+  ServerError,
 } from './Components';
 
 const Toast = Swal.mixin({
@@ -243,6 +244,7 @@ class App extends Component {
       cart,
       isEditing,
       currentProduct,
+      errMessage
     } = this.state;
 
     return (
@@ -270,6 +272,7 @@ class App extends Component {
               categories={categories}
               showAndCloseModal={this.showAndCloseModal}
               updateProductHandler={this.updateProductHandler}
+              errMessage={errMessage}
             />
           )}
           {confirmDisplay && (
@@ -317,6 +320,7 @@ class App extends Component {
                 />
               )}
             />
+            <Route path="/error" component={ServerError} />
             <Route path="*" render={() => <NotFound isNotFoundPage={true} />} />
           </Switch>
         </div>
